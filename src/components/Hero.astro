@@ -1,0 +1,34 @@
+---
+import OrbitalBackground from './OrbitalBackground.astro';
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const t = getDictionary(Astro.props.locale);
+---
+<section class="hero dark-section" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span>{t.hero.eyebrow}</p>
+      <h1 id="hero-title">{t.hero.title} <em>{t.hero.accent}</em></h1>
+      <p class="hero-motto">{t.hero.motto}</p>
+      <p class="hero-description">{t.hero.description}</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#missions">{t.hero.explore}<Icon name="arrow" /></a>
+        <a class="text-link" href="mailto:lfpadron@astrogatolabs.com">{t.hero.contact}<Icon name="arrow" /></a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="orbital-stage">
+        <OrbitalBackground />
+        <img class="hero-cat" src="/images/brand/gato-orbital-gradient.png" alt="" width="901" height="1006" fetchpriority="high" />
+        <span class="orbital-coordinate" aria-hidden="true">AG / LABS</span>
+      </div>
+      <div class="orbit-caption"><span class="signal-dot" aria-hidden="true"></span>{t.hero.orbitNote}</div>
+      <p class="orbit-note">{t.hero.orbitLabel}</p>
+      <button class="motion-toggle" type="button" aria-pressed="false" data-motion-toggle data-pause={t.a11y.pause} data-resume={t.a11y.resume} hidden>{t.a11y.pause}</button>
+    </div>
+    <ul class="hero-concepts" aria-label={t.pillars.title}>
+      {t.hero.concepts.map((concept) => <li><span aria-hidden="true">+</span>{concept}</li>)}
+    </ul>
+  </div>
+</section>

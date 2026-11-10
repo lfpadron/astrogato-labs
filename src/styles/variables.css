@@ -1,0 +1,20 @@
+:root {
+  --navy: #091726;
+  --navy-soft: #102338;
+  --navy-card: #142a40;
+  --ink: #142b40;
+  --muted: #526373;
+  --paper: #fafbf9;
+  --wash: #edf3f6;
+  --white: #fff;
+  --blue: #75c9ee;
+  --blue-dark: #176184;
+  --orange: #ffac70;
+  --orange-strong: #c74d0a;
+  --line: #d5e0e7;
+  --dark-line: #2a3e51;
+  --text-light: #c0cedb;
+  --radius: 12px;
+  --container: 1200px;
+  --font: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+}

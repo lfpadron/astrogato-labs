@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { es } from '../i18n/es';
+import { en } from '../i18n/en';
+import { SITE } from '../utils/seo';
+---
+<BaseLayout locale="es" title="Astrogato Labs · Español / English" canonical={`${SITE}/`}>
+  <main id="main" class="entry-page dark-section" tabindex="-1">
+    <img src="/images/brand/astrogato-logo-horizontal.png" alt="Astrogato Labs" width="2902" height="1005" />
+    <h1>{es.entry.title} <span lang="en-US">/ {en.entry.title}</span></h1>
+    <p>{es.entry.description}</p><p lang="en-US">{en.entry.description}</p>
+    <div class="entry-actions"><a class="button button-primary" href="/es/" lang="es-MX">🇲🇽 Español</a><a class="button button-secondary" href="/en/" lang="en-US">🇺🇸 English</a></div>
+    <script>
+      const languages = navigator.languages?.length ? navigator.languages : [navigator.language];
+      const locale = languages.find((language) => /^(es|en)(-|$)/i.test(language))?.split('-')[0]?.toLowerCase() ?? 'es';
+      // Only this entry page runs detection; /es/ and /en/ never redirect.
+      window.location.replace(`/${locale}/${window.location.hash}`);
+    </script>
+  </main>
+</BaseLayout>

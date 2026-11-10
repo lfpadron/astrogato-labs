@@ -1,0 +1,20 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const t = getDictionary(Astro.props.locale).philosophy;
+---
+<section class="section philosophy" id="philosophy" aria-labelledby="philosophy-title">
+  <div class="container">
+    <div class="section-intro split-intro">
+      <div><p class="eyebrow">{t.eyebrow}</p><h2 id="philosophy-title">{t.title}</h2></div>
+      <p class="section-description">{t.intro}</p>
+    </div>
+    <div class="values-grid">
+      {t.items.map((item, index) => <article class="value-card">
+        <div class="value-top"><Icon name={item.icon} /><span class="item-number" aria-hidden="true">0{index + 1}</span></div>
+        <h3>{item.title}</h3><p>{item.description}</p>
+      </article>)}
+    </div>
+  </div>
+</section>

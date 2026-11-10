@@ -1,0 +1,11 @@
+@keyframes orbit-turn { to { transform: rotate(360deg); } }
+.orbit { animation: orbit-turn 90s linear infinite; animation-play-state: paused; }
+.orbit-two { animation-duration: 120s; animation-direction: reverse; }
+.orbit-three { animation-duration: 160s; }
+.motion-ready .orbit { animation-play-state: running; }
+.motion-paused .orbit { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .motion-toggle { display: none; }
+}

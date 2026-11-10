@@ -1,0 +1,20 @@
+---
+import MissionCard from './MissionCard.astro';
+import { missions, type MissionCategory } from '../data/missions';
+import { getDictionary, type Locale } from '../i18n';
+interface Props { category: MissionCategory; locale: Locale }
+const { category, locale } = Astro.props;
+const t = getDictionary(locale).missions;
+const upcoming = category === 'upcoming';
+const id = upcoming ? 'missions' : 'demonstrations';
+---
+<section class:list={['section', 'missions-section', { 'demo-section': !upcoming }]} id={id} aria-labelledby={`${id}-title`}>
+  <div class="container">
+    <div class="section-intro">
+      {upcoming && <p class="eyebrow">{t.eyebrow}</p>}
+      <h2 id={`${id}-title`}>{upcoming ? t.upcoming : t.demonstration}</h2>
+      <p class="section-description">{upcoming ? t.upcomingIntro : t.demonstrationIntro}</p>
+    </div>
+    <div class="missions-list">{missions.filter((mission) => mission.category === category).map((mission) => <MissionCard mission={mission} locale={locale} index={missions.indexOf(mission)} />)}</div>
+  </div>
+</section>

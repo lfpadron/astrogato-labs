@@ -1,0 +1,41 @@
+---
+import { getDictionary, type Locale } from '../i18n';
+import { getSeo, SITE } from '../utils/seo';
+import '../styles/global.css';
+import '../styles/responsive.css';
+interface Props { locale: Locale; title?: string; noindex?: boolean; canonical?: string }
+const { locale, title, noindex = false, canonical } = Astro.props;
+const t = getDictionary(locale);
+const seo = getSeo(locale);
+---
+<!doctype html>
+<html lang={seo.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#091726" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ?? seo.title}</title>
+    <meta name="description" content={seo.description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical ?? seo.canonical} />
+    {!noindex && <><link rel="alternate" hreflang="es-MX" href={`${SITE}/es/`} /><link rel="alternate" hreflang="en-US" href={`${SITE}/en/`} /><link rel="alternate" hreflang="x-default" href={`${SITE}/`} /></>}
+    <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Astrogato Labs" />
+    <meta property="og:title" content={title ?? seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={canonical ?? seo.canonical} />
+    <meta property="og:locale" content={seo.ogLocale} />
+    <meta property="og:locale:alternate" content={seo.alternateLocale} />
+    <meta property="og:image" content={seo.image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={seo.imageAlt} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">{t.a11y.skip}</a>
+    <slot />
+  </body>
+</html>

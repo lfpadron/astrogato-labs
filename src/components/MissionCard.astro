@@ -1,0 +1,22 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+import type { Mission, MissionStatus } from '../data/missions';
+interface Props { mission: Mission; locale: Locale; index: number }
+const { mission, locale, index } = Astro.props;
+const t = getDictionary(locale);
+const statuses: Record<MissionStatus, string> = { preparing: t.missions.preparing, 'coming-soon': t.missions.comingSoon, demo: t.missions.demoStatus };
+---
+<article class="mission-card" data-mission={mission.id} aria-labelledby={`${mission.id}-title`}>
+  <figure class="mission-image">
+    <img src={mission.image[locale]} alt={mission.imageAlt[locale]} width="1200" height="675" loading="lazy" decoding="async" />
+  </figure>
+  <div class="mission-content">
+    <div class="mission-meta"><span class:list={['status', `status-${mission.status}`]}><span aria-hidden="true"></span>{statuses[mission.status]}</span><span class="mission-number" aria-hidden="true">AG—0{index + 1}</span></div>
+    <h3 id={`${mission.id}-title`}>{mission.title[locale]}</h3>
+    <p class="mission-description">{mission.description[locale]}</p>
+    <div class="mission-impact"><span>{t.missions.impact}</span><p>{mission.impact[locale]}</p></div>
+    {mission.notice === 'demo-not-production' && <p class="mission-warning"><Icon name="shield" />{t.missions.warning}</p>}
+    {mission.url && <a class="text-link mission-link" href={mission.url} target="_blank" rel="noopener noreferrer">{mission.category === 'upcoming' ? t.missions.platform : t.missions.demo}<Icon name="external" /><span class="sr-only"> — {mission.title[locale]} ({t.a11y.external})</span></a>}
+  </div>
+</article>

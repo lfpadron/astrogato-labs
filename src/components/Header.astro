@@ -1,0 +1,26 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import MobileNavigation from './MobileNavigation.astro';
+import { getDictionary, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href={`/${locale}/`} aria-label={t.a11y.home}>
+      <img src="/images/brand/astrogato-logo-horizontal.png" alt="Astrogato Labs" width="2902" height="1005" fetchpriority="high" />
+    </a>
+    <nav class="desktop-navigation" aria-label={t.a11y.navigation}>
+      <a href="#philosophy">{t.nav.philosophy}</a>
+      <a href="#difference">{t.nav.differences}</a>
+      <a href="#missions">{t.nav.missions}</a>
+      <a href="#contact">{t.nav.contact}</a>
+    </nav>
+    <LanguageSwitcher locale={locale} />
+    <MobileNavigation locale={locale} />
+  </div>
+</header>
+<script>
+  import '../scripts/navigation';
+</script>

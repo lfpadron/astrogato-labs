@@ -1,0 +1,13 @@
+---
+import { getDictionary, languageNames, locales, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+<nav class="language-switcher" aria-label={t.a11y.language}>
+  {locales.map((language) => (
+    <a href={`/${language}/`} lang={language === 'es' ? 'es-MX' : 'en-US'} hreflang={language === 'es' ? 'es-MX' : 'en-US'} aria-current={locale === language ? 'page' : undefined} data-language-link>
+      <span aria-hidden="true">{language === 'es' ? '🇲🇽' : '🇺🇸'}</span> {languageNames[language]}
+    </a>
+  ))}
+</nav>

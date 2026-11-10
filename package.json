@@ -1,0 +1,33 @@
+{
+  "name": "astrogato-labs",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:container": "playwright test --config playwright.container.config.ts",
+    "validate": "npm run check && npm test && npm run build && npm run test:e2e",
+    "assets:generate": "node scripts/generate-assets.mjs",
+    "assets:missions": "node scripts/generate-mission-images.mjs"
+  },
+  "dependencies": {
+    "astro": "7.4.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1",
+    "@types/node": "26.6.6",
+    "sharp": "0.35.5",
+    "typescript": "6.0.3",
+    "vitest": "5.0.5"
+  }
+}

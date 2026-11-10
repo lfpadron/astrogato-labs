@@ -1,0 +1,15 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+<footer class="site-footer dark-section">
+  <div class="container footer-grid">
+    <a class="footer-brand" href={`/${locale}/`} aria-label={t.a11y.home}><img src="/images/brand/astrogato-logo-horizontal.png" alt="Astrogato Labs" width="2902" height="1005" loading="lazy" /></a>
+    <address><p class="footer-label">{t.footer.contact}</p><p class="contact-name">luis fernando padrón</p><a href="mailto:lfpadron@astrogatolabs.com"><Icon name="mail" />lfpadron@astrogatolabs.com</a><a href="https://wa.me/525539887664" target="_blank" rel="noopener noreferrer"><Icon name="whatsapp" />+52 55 3988 7664<span class="sr-only"> — WhatsApp ({t.a11y.external})</span></a></address>
+    <div class="footer-about"><p class="footer-label">{t.footer.website}</p><a href="https://astrogatolabs.com.mx/">astrogatolabs.com.mx<Icon name="arrow" /></a><p>{t.footer.motto}</p></div>
+  </div>
+  <div class="container footer-bottom"><span>© {new Date().getUTCFullYear()} Astrogato Labs</span><span>{t.footer.note}</span></div>
+</footer>

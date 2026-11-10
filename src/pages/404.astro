@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { es } from '../i18n/es';
+import { en } from '../i18n/en';
+---
+<BaseLayout locale="es" title="404 · Astrogato Labs" noindex>
+  <main id="main" class="entry-page dark-section" tabindex="-1">
+    <p class="eyebrow">404 / Astrogato Labs</p>
+    <h1>{es.notFound.title}</h1><p>{es.notFound.description}</p><a class="button button-primary" href="/es/">{es.notFound.back}</a>
+    <div class="error-translation" lang="en-US"><h2>{en.notFound.title}</h2><p>{en.notFound.description}</p><a class="text-link" href="/en/">{en.notFound.back}</a></div>
+  </main>
+</BaseLayout>
